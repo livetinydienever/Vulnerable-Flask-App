@@ -5,5 +5,5 @@
 2) to serve app from app folder, run 'python app.py'
 3) to run e2e test, cd to tests folder and run 'python e2e_zap.py'
 
-## Vulnerable Flask Application for ZAP to test against e2e and/or automate in GitHub Actions
+## Ports
 > Vuln App should appear on port 5050 & ZAP should be set to run on port 8090
