@@ -23,6 +23,7 @@ app_port = os.environ.get('APP_PORT', 5050)
 
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config["SQLAlCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SECRET_KEY_HMAC'] = 'secret'
 app.config['SECRET_KEY_HMAC_2'] = 'am0r3C0mpl3xK3y'
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
@@ -32,7 +33,7 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    _id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80), unique=True)
 
@@ -344,6 +345,7 @@ def yaml_hammer():
 
 
 if __name__ == "__main__":
+    db.create_all()
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(app_port)
     IOLoop.instance().start()
